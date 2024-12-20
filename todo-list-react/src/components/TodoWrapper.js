@@ -1,19 +1,23 @@
 import React, { useState } from 'react';
 import { TodoForm } from "./TodoForm";
-import {TodoList} from "./TodoList";
+import {Todo} from "./Todo";
 
 export const TodoWrapper = () => {
     const [todos, setTodos] = useState([])
 
-    const addTodo = (todo) => {
+    const addTodo = todo => {
         setTodos([...todos, {id: crypto.randomUUID(), task: todo, isCompleted: false, isEditing: false}]);
+    }
+
+    const toggleComplete = id => {
+        setTodos(todos.map(todo => todo.id === id ? {...todo, isCompleted: !todo.isCompleted} : todo));
     }
 
     return (
         <div>
             <TodoForm addTodo={addTodo} />
             {todos.map((todo) => (
-                <TodoList value={todo.task} key={todo.id}/>
+                <Todo value={todo} key={todo.id} toggleComplete={toggleComplete}/>
             ))}
         </div>
     )
