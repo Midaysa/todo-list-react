@@ -10,6 +10,7 @@ export const Todo = ({value, toggleComplete, deleteTodo}) => {
             <FontAwesomeIcon icon={value.isCompleted ? faCheck : faSquare}
                              onClick={() => toggleComplete(value.id)}/>
             <p>{value.task}</p>
+            <FontAwesomeIcon icon={faTrash} onClick={() => deleteTodo(value.id)}/>
         </div>
     )
 }
